@@ -1,0 +1,27 @@
+.bookitem {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  margin: 40px;
+}
+
+.bookitem .cover img {
+}
+
+.bookitem .cover {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.bookitem h3 {
+  margin-bottom: 10px;
+}
+
+#nav {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#nbooks {
+  margin-top: -50px;
+  margin-bottom: 20px;
+}

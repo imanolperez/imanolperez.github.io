@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="pico-bootstrap-grid.min.css">
+    <link rel="stylesheet" href="style.css">
+    <title>My private library</title>
+  </head>
+  <body>
+    <main class="container">
+      <h1>My private library</h1>
+      <div id="nbooks"></div>
+      <div id="nav">
+      </div>
+
+      <div id="allbooks">
+        <article aria-busy="true" id="loading"></article> 
+      </div>
+
+    </main>
+  </body>
+
+<script type="text/javascript" src="papaparse.min.js"></script>
+
+<script>
+
+function imageLoaded(img)
+{
+  if (img.width <= 5)
+  {
+    img.src = "covers/missing.png"
+  }
+    img.width = 100;
+    img.setAttribute("style", "min-width: 50px;")
+}
+
+function bookCard(book)
+{
+
+  var year = book["publish_date"];
+  if (typeof year === 'undefined')
+  {
+    year = "";
+    console.log("error")
+  } else
+  {
+    year = year.split("-")[0];
+  }
+  var cover = book["cover"];
+  if (book["title"] == "Signatures in machine learning and finance")
+  {
+    cover = "imanol.jpg"
+  }
+  
+  if (cover.length == 0)
+  {
+    cover = "missing.png"
+  }
+
+  return `
+        <!-- book -->
+        <article class="bookitem">
+          <div class="row">
+            <div class="col cover">
+              <img src="covers/${cover}" onload="imageLoaded(this)">
+            </div>
+            <div class="col-10">
+              <h3>${book["title"]}</h3>
+              <p><small>${book["creators"]}<br>${year}</small></p>
+            </div>
+          </div>
+         </article>
+         <!-- end of book -->
+
+  `;
+}
+
+
+function acquisitionCard(book)
+{
+
+  var year = book["publish_date"];
+  if (typeof year === 'undefined')
+  {
+    year = "";
+    console.log("error")
+  } else
+  {
+    year = year.split("-")[0];
+  }
+  var cover = book["cover"];
+  if (book["title"] == "Signatures in machine learning and finance")
+  {
+    cover = "imanol.jpg"
+  }
+  
+  if (cover.length == 0)
+  {
+    cover = "missing.png"
+  }
+
+  return `
+        <!-- book -->
+            <div style="text-align: center; padding-bottom: 20px;">
+              <img src="covers/${cover}" width=150>
+            </div>
+       <!-- end of book -->
+
+  `;
+}
+
+
+function load()
+{
+  let result = Papa.parse(
+    'https://www.imanolperez.com/library/library.csv',
+    {
+      download: true,
+      header: true,
+      complete: function(result)
+      {
+        var books = {};
+
+        for (const book of result.data)
+        {
+          if (typeof book["group"] === 'undefined')
+          {
+            continue;
+          }
+
+          if (!(book["group"] in books))
+          {
+            books[book["group"]] = [];
+          }
+
+          books[book["group"]].push(book)
+        }
+
+        document.getElementById('nbooks').innerHTML = `${result.data.length} books`;
+        var div = document.getElementById('allbooks');
+        var cards = "";
+        var groups = Object.keys(books);
+        groups.sort();
+
+        cards += `<h2>Latest acquisitions</h2>`
+        cards += `<div class="grid" style="margin-bottom: 30px;">`
+        var nacquisitions = 0;
+        for (var i=result.data.length - 1; i>=0; --i)
+        {
+          if (typeof result.data[i]["group"] === 'undefined')
+          {
+            continue;
+          }
+          cards += acquisitionCard(result.data[i]);
+          nacquisitions += 1;
+          if (nacquisitions >= 3)
+          {
+            break;
+          }
+        }
+        cards += `</div>`
+
+        for (var i=0; i<groups.length; ++i)
+        {
+          var group = groups[i];
+          cards += `<h2 id='${group}'>${group}</h2>`
+          if (i == 0)
+          {
+            document.getElementById('nav').innerHTML += `<a href="#${group}'">${group}</a>`
+          } else
+          {
+            document.getElementById('nav').innerHTML += `&nbsp;&nbsp;<small>&#9679;</small>&nbsp;&nbsp;<nobr><a href="#${group}">${group}</a></nobr>`
+
+          }
+
+          var group_books = books[group];
+          group_books.sort(
+            (a, b) => a["creators"].split(" ").at(-1).localeCompare(b["creators"].split(" ").at(-1))
+          ) 
+
+          for (const book of group_books)
+          {
+            if (typeof book["title"] === 'undefined')
+            {
+              continue;
+            }
+            cards += bookCard(book);
+          }
+        }
+
+        div.innerHTML += cards;
+
+        var loading = document.getElementById("loading")
+        loading.style.display = "none";
+
+      }
+    }
+  )
+}
+
+load()
+</script>
+
+</html>

@@ -1,0 +1,121 @@
+<html>
+<head>
+<title>spinElements</title>
+<link rel="stylesheet" type="text/css" href="s.css"/>
+<style>
+    #p {
+          height: 100px;
+          width: 100px;
+          position: absolute;
+          left: 150px;
+          top: 250px;
+     }
+
+     #s {
+     	height: 100px;
+     	width: 100px;
+     	position: absolute;
+	      -moz-border-radius: 50px;
+	      -webkit-border-radius: 50px;
+	      -o-border-radius: 50px;
+	      border-radius: 50px;
+	      background-color: #BDBDBD;
+	      opacity: 0.6;
+	      visibility: hidden;
+     }
+     .pb {
+          position: absolute;
+          width: 100px;
+          height: 100px;
+          -moz-border-radius: 50px;
+          -webkit-border-radius: 50px;
+          -o-border-radius: 50px;
+
+          border-radius: 50px;
+     }
+     .pie {
+          position: absolute;
+          width: 100px;
+          height: 100px;
+          -moz-border-radius: 50px;
+          -webkit-border-radius: 50px;
+          -o-border-radius: 50px;
+          border-radius: 50px;
+          clip: rect(0px, 50px, 100px, 0px);
+
+     }
+     .hold {
+          position: absolute;
+          width: 100px;
+          height: 100px;
+          -moz-border-radius: 50px;
+          -webkit-border-radius: 50px;
+          -o-border-radius: 50px;
+          border-radius: 50px;
+          clip: rect(0px, 100px, 100px, 50px);
+     }
+     #p1 .pie, #p2 .pie, #p3 .pie {
+     	    box-shadow: inset 0 0 10px #424242;
+     }
+     #p1 .pie {
+          background-color: #2E9AFE;
+          -webkit-transform:rotate(120deg);
+          -moz-transform:rotate(120deg);
+          -o-transform:rotate(120deg);
+          transform:rotate(120deg);
+     }
+     #p2 {
+          -webkit-transform:rotate(120deg);
+          -moz-transform:rotate(120deg);
+          -o-transform:rotate(120deg);
+          transform:rotate(120deg);
+     }
+     #p2 .pie {
+          background-color: #61380B;
+          -webkit-transform:rotate(120deg);
+          -moz-transform:rotate(120deg);
+          -o-transform:rotate(120deg);
+          transform:rotate(120deg);
+     }
+     #p3 {
+          -webkit-transform:rotate(240deg);
+          -moz-transform:rotate(240deg);
+          -o-transform:rotate(240deg);
+          transform:rotate(240deg);
+     }
+     #p3 .pie {
+          background-color: #F2F2F2;
+          -webkit-transform:rotate(120deg);
+          -moz-transform:rotate(120deg);
+          -o-transform:rotate(120deg);
+          transform:rotate(120deg);
+     }
+</style>
+</head>
+<body onkeyup="u(event)" onkeydown="d(event)">
+<div class="e">
+<p>Use <b>right</b> and <b>left</b> arrows to move the disk, <b>up</b> arrow to activate the shield and <b>down</b> arrow to deactivate it. Match <code>WATER, EARTH AND AIR</code> in the circle, and make sure you activate the shield when <code>FIRE</code> comes! You can use the shield to protect from the other elements too, but be careful: you can use it for a limited time, and you will have to reload it after.</p>Game created for Js13kGames. Total size: 8Kb (<b>4kb</b> when minified)</p>
+</div>
+
+<div id="g">
+
+<div id="p">
+	<div class="pb"></div>
+	<div id="p1" class="hold"><div class="pie"></div></div>
+	<div id="p2" class="hold"><div class="pie"></div></div>
+	<div id="p3" class="hold"><div class="pie"></div></div>
+	<div id="s"></div>
+</div>
+<div id="bl"></div>
+<div id="lv">10</div>
+<div id="pt">0</div>
+<div id="st">STREAK: 0</div>
+<div id="ml">x16</div>
+
+<div id="b"><div id="b2"/></div>
+
+</div>
+<div id="end"><h1>GAME OVER</h1><p id="ppp"></p><div onclick="location.reload()">RESTART</div></h1></div>
+<script src="m.js"></script>
+</body>
+</html>
