@@ -11,9 +11,12 @@ if __name__ == "__main__":
   library = pd.read_csv("library.raw.csv")
   library["cover"] = ""
   
-  pbar = tqdm(library.iterrows(), total=len(library))
+  pbar = tqdm(library.iloc[::-1].iterrows(), total=len(library))
 
   for i, book in pbar:
+    #if book["title"] != "Holy Bible":
+    #  continue
+
     if np.isnan(book["ean_isbn13"]):
       isbn = ""
     else:
