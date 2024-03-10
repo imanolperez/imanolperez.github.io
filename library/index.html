@@ -60,7 +60,7 @@ function bookCard(book)
 
   return `
         <!-- book -->
-        <article class="bookitem">
+        <article class="bookitem" id="${book["title"]}">
           <div class="row">
             <div class="col cover">
               <img src="covers/${cover}" onload="imageLoaded(this)">
@@ -103,7 +103,7 @@ function acquisitionCard(book)
   return `
         <!-- book -->
             <div style="text-align: center; padding-bottom: 20px;">
-              <img src="covers/${cover}" width=150>
+              <a href="#${book["title"]}"><img src="covers/${cover}" width=150></a>
             </div>
        <!-- end of book -->
 
