@@ -4,11 +4,14 @@ import pandas as pd
 import os
 
 def get_cover(book):
-    cover = f'covers/{book["cover"]}'
-    if not os.path.isfile(cover) or os.path.getsize(cover) < 1000:
-      cover = 'covers/missing.png'
+  if book["title"] == "Signatures in machine learning and finance":
+    return "covers/imanol.jpg"
 
-    return cover
+  cover = f'covers/{book["cover"]}'
+  if not os.path.isfile(cover) or os.path.getsize(cover) < 1000:
+    cover = 'covers/missing.png'
+
+  return cover
 
 def add_groups(html, library):
   groups = sorted(library["group"].unique())
