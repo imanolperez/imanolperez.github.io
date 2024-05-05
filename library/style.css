@@ -25,3 +25,11 @@
   margin-top: -50px;
   margin-bottom: 20px;
 }
+
+h3 a {
+  color: var(--h2-color);
+}
+
+h3 a:hover {
+  text-decoration: none;
+}

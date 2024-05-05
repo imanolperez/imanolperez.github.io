@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="pico-bootstrap-grid.min.css">
+    <link rel="stylesheet" href="style.css">
+    <title>My private library</title>
+  </head>
+  <body>
+    <main class="container">
+      <h1>My private library</h1>
+      <div id="nbooks">{N_BOOKS} books</div>
+      <div id="nav">
+        {NAV}
+      </div>
+
+      <div id="allbooks">
+        <article aria-busy="true" id="loading" style="display: none;"></article> 
+      <h2>Latest acquisitions</h2><div class="grid" style="margin-bottom: 30px;">
+        {ACQUISITIONS}
+  
+  </div>
+  
+  {BOOKS}
+
+
+  </div>
+
+    </main>
+  
+
+
+</body></html>
