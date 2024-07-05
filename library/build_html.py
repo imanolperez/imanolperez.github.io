@@ -14,6 +14,7 @@ def get_cover(book):
   return cover
 
 def add_groups(html, library):
+  print(library["group"].unique())
   groups = sorted(library["group"].unique())
   
   sep = "&nbsp;&nbsp;<small>●</small>&nbsp;&nbsp;"
